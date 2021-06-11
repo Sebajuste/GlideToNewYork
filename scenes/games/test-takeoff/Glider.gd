@@ -20,6 +20,8 @@ func _physics_process(delta):
 	
 	#global_transform.basis = Basis()
 	
+	#print("vspeed: ", linear_velocity.y)
+	
 	pass
 
 
@@ -31,6 +33,7 @@ func _unhandled_input(event):
 			chain.get_node("PinJoint7").queue_free()
 		
 
+var old_linear_velocity := Vector3.ZERO
 
 func _integrate_forces(state : PhysicsDirectBodyState) -> void:
 	
@@ -40,5 +43,9 @@ func _integrate_forces(state : PhysicsDirectBodyState) -> void:
 	
 	state.angular_velocity = Vector3.ZERO
 	state.linear_velocity.z = 0
+	
+	#print("linear_velocity: ", (state.linear_velocity - old_linear_velocity).length() )
+	
+	old_linear_velocity = state.linear_velocity
 	
 	pass

@@ -17,9 +17,9 @@ func _ready():
 
 func _physics_process(delta):
 	
-	var pos = ($"../Cessna".global_transform.origin - $"../Target".global_transform.origin) / 2
+	var pos = ($"../Cessna".global_transform.origin - $"../Glider".global_transform.origin) / 2
 	
-	pos +=  $"../Target".global_transform.origin
+	pos +=  $"../Glider".global_transform.origin
 	pos.z = 27
 	
 	self.global_transform.origin = lerp(self.global_transform.origin, pos, camera_speed * delta)
