@@ -1,9 +1,6 @@
+class_name Player
 extends KinematicBody
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 const GRAVITY := 9.81
 
@@ -34,10 +31,19 @@ var velocity = Vector3.ZERO
 var turn_input = 0
 var pitch_input = 0
 
+export(String, "None", "Gameplay1", "Gameplay2", "Gameplay3") var control_mode = "None" setget set_control_mode
+
+onready var skin := $Skin
+onready var control: StateMachine = $ControlSM
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("test ", control_mode)
+	if control_mode:
+		control.transition_to("Control/%s" % control_mode)
+	else:
+		control.transition_to("Control/None")
 	
 	pass # Replace with function body.
 
@@ -51,12 +57,17 @@ func _unhandled_input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	
-	
 	pass
 
 
+func set_control_mode(value):
+	control_mode = value
+	if control:
+		print("set control to %s" % value)
+		control.transition_to("Control/%s" % value)
 
+
+"""
 func _physics_process(delta):
 	
 	process_input(delta)
@@ -102,3 +113,4 @@ func process_input(delta):
 	pitch_input = 0
 	pitch_input -= Input.get_action_strength("pitch_down")
 	pitch_input += Input.get_action_strength("pitch_up")
+"""
