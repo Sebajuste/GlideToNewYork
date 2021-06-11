@@ -1,0 +1,45 @@
+[gd_resource type="VisualShader" load_steps=3 format=2]
+
+[sub_resource type="VisualShaderNodeInput" id=1]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=2]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1.1, 1.1, 1.1 ) ]
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+
+
+
+void vertex() {
+// Input:2
+	vec3 n_out2p0 = VERTEX;
+
+// VectorOp:3
+	vec3 n_in3p1 = vec3(1.10000, 1.10000, 1.10000);
+	vec3 n_out3p0 = n_out2p0 * n_in3p1;
+
+// Output:0
+	VERTEX = n_out3p0;
+
+}
+
+void fragment() {
+// Output:0
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -273.635, 93 )
+nodes/vertex/2/node = SubResource( 1 )
+nodes/vertex/2/position = Vector2( -160, 200 )
+nodes/vertex/3/node = SubResource( 2 )
+nodes/vertex/3/position = Vector2( 100, 180 )
+nodes/vertex/connections = PoolIntArray( 2, 0, 3, 0, 3, 0, 0, 0 )

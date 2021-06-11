@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 1, 10 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 1, 1, 2 )
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 20, 0.5, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 4, 0.5, 1 )
+
+[node name="Plane01" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.20205 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.515681, 0.856781, 0, -0.856781, 0.515681, 0, 0.564766, 5.6866 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 2 )
+
+[node name="Wing" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+material/0 = SubResource( 2 )
+
+[node name="Wing2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29656, 6.08749 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 2 )
