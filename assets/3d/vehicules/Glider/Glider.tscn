@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/3d/Materials/planes.material" type="Material" id=1]
+[ext_resource path="res://assets/3d/vehicules/Glider/Glider.mesh" type="ArrayMesh" id=2]
+
+[node name="Glider" type="MeshInstance"]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
