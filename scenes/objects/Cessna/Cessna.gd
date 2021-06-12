@@ -1,30 +1,19 @@
 extends StaticBody
 
-
-
 export var max_speed := 0.5
 export var acceleration := 0.3
 
-
-
 export(NodePath) var path_follow_path
 
-
 onready var path_follow := get_node(path_follow_path)
-
 
 var speed := 0.0
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	# set_as_toplevel(true)
-	pass # Replace with function body.
+	path_follow.connect("end_of_path", self, "_on_end_of_path")
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _physics_process(delta):
@@ -38,3 +27,9 @@ func _physics_process(delta):
 		self.global_transform.origin = path_follow.global_transform.origin
 	
 
+
+
+
+func _on_end_of_path():
+	path_follow._generate_curve(global_transform.origin)
+	pass

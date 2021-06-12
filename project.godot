@@ -39,6 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gamejam-newyork"
+run/main_scene="res://scenes/games/test-takeoff/Test-TakeOff.tscn"
 config/icon="res://icon.png"
 
 [input]
