@@ -13,7 +13,7 @@ func _process(delta):
 	pass
 
 
-func _generate_curve(start):
-	get_parent()._generate_curve(start)
+func _generate_curve(newOrigin : Vector3):
+	get_parent()._generate_curve(newOrigin)
 	set_unit_offset(0)
 	pass
