@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/objects/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/games/Gameplay2/Gameplay2.gd" type="Script" id=2]
+
+[sub_resource type="QuadMesh" id=1]
+size = Vector2( 3000, 3000 )
+
+[sub_resource type="OpenSimplexNoise" id=2]
+octaves = 4
+period = 5.6
+lacunarity = 1.42
+
+[sub_resource type="NoiseTexture" id=3]
+width = 1024
+height = 1024
+noise = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = SubResource( 3 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1000, 30, 10 )
+
+[node name="Gameplay2" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="Ground" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -162.273, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+control_mode = "Gameplay2"
+
+[node name="Camera" type="Camera" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 94.4873, -26.0389 )
+far = 5000.0
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -384.003 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

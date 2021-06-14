@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/3d/buildings/store01/Store01.dae" type="PackedScene" id=1]
-[ext_resource path="res://scenes/objects/Plane01/Plane01.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/objects/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/games/test-final/grid.tres" type="Shader" id=3]
 [ext_resource path="res://scenes/games/test-final/building.material" type="Material" id=4]
 [ext_resource path="res://scenes/games/test-final/border.shader" type="Shader" id=5]
@@ -194,6 +194,7 @@ material/0 = null
 visible = false
 
 [node name="Plane" parent="." instance=ExtResource( 2 )]
+control_mode = "Gameplay3"
 
 [node name="Camera" type="Camera" parent="Plane"]
 transform = Transform( 1, 0, 0, 0, 0.991146, 0.132775, 0, -0.132775, 0.991146, 0, 9.83075, 28.5182 )
