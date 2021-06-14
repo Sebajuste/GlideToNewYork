@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/objects/Cessna/Cessna.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/objects/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/objects/Water/Water.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/games/test-takeoff/Glider.gd" type="Script" id=4]
 [ext_resource path="res://scenes/objects/clouds/worley-cloud/WorleyCloud.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/games/test-takeoff/Camera.gd" type="Script" id=6]
@@ -45,181 +46,7 @@ _data = {
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="VisualShaderNodeInput" id=12]
-input_name = "time"
-
-[sub_resource type="VisualShaderNodeVectorOp" id=13]
-operator = 2
-
-[sub_resource type="VisualShaderNodeVectorOp" id=14]
-
-[sub_resource type="VisualShaderNodeScalarUniform" id=15]
-uniform_name = "speed"
-
-[sub_resource type="VisualShaderNodeVectorOp" id=16]
-operator = 2
-
-[sub_resource type="VisualShaderNodeVectorFunc" id=17]
-
-[sub_resource type="VisualShaderNodeColorUniform" id=18]
-uniform_name = "albedo"
-
-[sub_resource type="VisualShaderNodeVec3Uniform" id=19]
-uniform_name = "direction"
-
-[sub_resource type="VisualShaderNodeScalarConstant" id=20]
-constant = 0.99
-
-[sub_resource type="VisualShaderNodeScalarConstant" id=21]
-constant = 0.1
-
-[sub_resource type="VisualShaderNodeScalarConstant" id=22]
-constant = 0.05
-
-[sub_resource type="OpenSimplexNoise" id=23]
-
-[sub_resource type="NoiseTexture" id=24]
-noise = SubResource( 23 )
-
-[sub_resource type="VisualShaderNodeTexture" id=25]
-source = 5
-texture = SubResource( 24 )
-
-[sub_resource type="VisualShaderNodeTextureUniform" id=26]
-uniform_name = "normalmap"
-
-[sub_resource type="VisualShaderNodeInput" id=27]
-input_name = "uv"
-
-[sub_resource type="VisualShader" id=28]
-code = "shader_type spatial;
-render_mode specular_schlick_ggx;
-
-uniform vec4 albedo : hint_color;
-uniform float speed;
-uniform vec3 direction;
-uniform sampler2D normalmap;
-
-
-
-void vertex() {
-// Output:0
-
-}
-
-void fragment() {
-// ColorUniform:2
-	vec3 n_out2p0 = albedo.rgb;
-	float n_out2p1 = albedo.a;
-
-// Scalar:4
-	float n_out4p0 = 0.990000;
-
-// Scalar:6
-	float n_out6p0 = 0.050000;
-
-// Scalar:5
-	float n_out5p0 = 0.100000;
-
-// Input:9
-	vec3 n_out9p0 = vec3(UV, 0.0);
-
-// ScalarUniform:13
-	float n_out13p0 = speed;
-
-// Input:10
-	float n_out10p0 = TIME;
-
-// VectorOp:14
-	vec3 n_out14p0 = vec3(n_out13p0) * vec3(n_out10p0);
-
-// VectorUniform:3
-	vec3 n_out3p0 = direction;
-
-// VectorFunc:15
-	vec3 n_out15p0 = normalize(n_out3p0);
-
-// VectorOp:11
-	vec3 n_out11p0 = n_out14p0 * n_out15p0;
-
-// VectorOp:12
-	vec3 n_out12p0 = n_out9p0 + n_out11p0;
-
-// Texture:7
-	vec3 n_out7p0;
-	float n_out7p1;
-	{
-		vec4 normalmap_tex_read = texture(normalmap, n_out12p0.xy);
-		n_out7p0 = normalmap_tex_read.rgb;
-		n_out7p1 = normalmap_tex_read.a;
-	}
-
-// Output:0
-	ALBEDO = n_out2p0;
-	ALPHA = n_out4p0;
-	ROUGHNESS = n_out6p0;
-	SPECULAR = n_out5p0;
-	NORMALMAP = n_out7p0;
-
-}
-
-void light() {
-// Output:0
-
-}
-"
-graph_offset = Vector2( 718.741, -191 )
-nodes/fragment/0/position = Vector2( 1280, 40 )
-nodes/fragment/2/node = SubResource( 18 )
-nodes/fragment/2/position = Vector2( 1020, -120 )
-nodes/fragment/3/node = SubResource( 19 )
-nodes/fragment/3/position = Vector2( -180, 80 )
-nodes/fragment/4/node = SubResource( 20 )
-nodes/fragment/4/position = Vector2( 1020, 0 )
-nodes/fragment/5/node = SubResource( 21 )
-nodes/fragment/5/position = Vector2( 1020, 160 )
-nodes/fragment/6/node = SubResource( 22 )
-nodes/fragment/6/position = Vector2( 1020, 80 )
-nodes/fragment/7/node = SubResource( 25 )
-nodes/fragment/7/position = Vector2( 800, 200 )
-nodes/fragment/8/node = SubResource( 26 )
-nodes/fragment/8/position = Vector2( 540, 200 )
-nodes/fragment/9/node = SubResource( 27 )
-nodes/fragment/9/position = Vector2( 320, -80 )
-nodes/fragment/10/node = SubResource( 12 )
-nodes/fragment/10/position = Vector2( -180, -20 )
-nodes/fragment/11/node = SubResource( 13 )
-nodes/fragment/11/position = Vector2( 320, 40 )
-nodes/fragment/12/node = SubResource( 14 )
-nodes/fragment/12/position = Vector2( 580, 20 )
-nodes/fragment/13/node = SubResource( 15 )
-nodes/fragment/13/position = Vector2( -180, -100 )
-nodes/fragment/14/node = SubResource( 16 )
-nodes/fragment/14/position = Vector2( 120, -40 )
-nodes/fragment/15/node = SubResource( 17 )
-nodes/fragment/15/position = Vector2( 80, 80 )
-nodes/fragment/connections = PoolIntArray( 8, 2, 7, 2, 9, 0, 12, 0, 11, 0, 12, 1, 12, 0, 7, 0, 7, 0, 0, 8, 2, 0, 0, 0, 4, 0, 0, 1, 5, 0, 0, 4, 6, 0, 0, 3, 13, 0, 14, 0, 10, 0, 14, 1, 14, 0, 11, 0, 3, 0, 15, 0, 15, 0, 11, 1 )
-
-[sub_resource type="OpenSimplexNoise" id=29]
-octaves = 4
-
-[sub_resource type="NoiseTexture" id=30]
-seamless = true
-as_normalmap = true
-noise = SubResource( 29 )
-
-[sub_resource type="ShaderMaterial" id=31]
-shader = SubResource( 28 )
-shader_param/albedo = Color( 0.105882, 0.219608, 0.392157, 1 )
-shader_param/speed = 0.025
-shader_param/direction = Vector3( 1, 0, 0 )
-shader_param/normalmap = SubResource( 30 )
-
-[sub_resource type="PlaneMesh" id=32]
-material = SubResource( 31 )
-size = Vector2( 20, 20 )
-
-[sub_resource type="ProceduralSky" id=33]
+[sub_resource type="ProceduralSky" id=12]
 sky_top_color = Color( 0.00784314, 0.0627451, 0.0980392, 1 )
 sky_horizon_color = Color( 0.00784314, 0.12549, 0.294118, 1 )
 ground_bottom_color = Color( 0, 0, 0, 1 )
@@ -231,9 +58,9 @@ sun_angle_max = 32.0
 sun_curve = 0.00473661
 sun_energy = 50.0
 
-[sub_resource type="Environment" id=34]
+[sub_resource type="Environment" id=13]
 background_mode = 2
-background_sky = SubResource( 33 )
+background_sky = SubResource( 12 )
 
 [node name="Test-TakeOff" type="Spatial"]
 script = ExtResource( 7 )
@@ -463,13 +290,10 @@ curve = SubResource( 11 )
 transform = Transform( 0.957011, 0.289921, -0.00864401, -0.289894, 0.957049, 0.00424859, 0.00950458, -0.0015601, 0.999954, -0.018528, -0.954168, -0.0578613 )
 loop = false
 
-[node name="Water" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.361, 68.8746 )
-mesh = SubResource( 32 )
-material/0 = null
+[node name="Water" parent="." instance=ExtResource( 3 )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 34 )
+environment = SubResource( 13 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.533359, 0.594501, -0.601745, -0.744347, 0.667794, -1.14073e-08, 0.401842, 0.447907, 0.798688, 0, 2.96261, 0 )
