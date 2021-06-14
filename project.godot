@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "LevelsConfig",
+"language": "GDScript",
+"path": "res://scenes/games/Main/levels.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://scripts/miscs/state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
+"LevelsConfig": "",
 "Player": "",
 "PlayerState": "",
 "State": "",
@@ -40,6 +46,10 @@ _global_script_class_icons={
 
 config/name="gamejam-newyork"
 config/icon="res://icon.png"
+
+[autoload]
+
+LevelManager="*res://scripts/singletons/LevelManager.gd"
 
 [input]
 
