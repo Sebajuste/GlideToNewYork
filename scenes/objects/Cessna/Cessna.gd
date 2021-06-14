@@ -2,21 +2,20 @@ extends StaticBody
 
 export var max_speed : float = 0.5
 export var max_force : float = 0.2
-export var initial_force : float = 0#.01
 
 export(NodePath) var path_follow_path
 
 onready var path_follow := get_node(path_follow_path)
 
-var position : Vector3
-var velocity : Vector3 = Vector3(0, 0, 0)
-var acceleration : Vector3 = Vector3(0, 0, 0)
+var look_ahead_distance : float = 100
+var position : Vector3 = Vector3.ZERO
+var velocity : Vector3 = Vector3.ZERO
+var acceleration : Vector3 = Vector3.ZERO
 
 func _ready():
 	path_follow.connect("end_of_path", self, "_on_end_of_path")
-	_apply_force(Vector3(initial_force, 0, 0))
 	position = self.global_transform.origin
-	#path_follow.unit_offset = 0.1
+	path_follow.offset = look_ahead_distance
 	pass
 
 func _apply_force(force : Vector3):
@@ -38,7 +37,8 @@ func _physics_process(delta):
 		desired = desired.normalized() * max_speed
 		var steering : Vector3 = desired - velocity
 		_apply_force(steering)
-		print("p=" + str(position) + ", v=" + str(velocity) + ", s=" + str(steering) + ", uo=" + str(path_follow.unit_offset))
+		#print("p=" + str(position) + ", t=" + str(target) + ", s=" + str(steering) + ", uo=" + str(path_follow.unit_offset))
+		#print("p=" + str(position) + ", v=" + str(velocity) + ", s=" + str(steering) + ", uo=" + str(path_follow.unit_offset))
 		pass
 	
 	self.global_transform.origin = position
@@ -48,6 +48,7 @@ func _physics_process(delta):
 
 func _on_end_of_path():
 	path_follow._generate_curve(global_transform.origin)
+	path_follow.offset = look_ahead_distance
 	pass
 
 

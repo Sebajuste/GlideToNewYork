@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/3d/buildings/LibertyStatue/libertystatue.material" type="Material" id=1]
+[ext_resource path="res://assets/3d/Materials/libertystatue.material" type="Material" id=1]
 [ext_resource path="res://assets/3d/buildings/LibertyStatue/LibertyStatue.mesh" type="ArrayMesh" id=2]
 
 [node name="LibertyStatue" type="MeshInstance"]

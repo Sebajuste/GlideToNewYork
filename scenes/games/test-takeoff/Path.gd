@@ -21,7 +21,7 @@ func _generate_curve(newOrigin : Vector3):
 	# move the origin of the new curve, add a first point at position 0, 0, 0.
 	global_transform.origin = newOrigin
 	var curve := Curve3D.new()
-	curve.add_point(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0))
+	curve.add_point(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
 	
 	# Then generate a new destination and in / out points
 	var vecPos : Vector3 = _get_random_destination()

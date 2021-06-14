@@ -6,19 +6,19 @@ const GRAVITY := 9.81
 
 
 # Can't fly below this speed
-var min_flight_speed = 10
+export var min_flight_speed = 10
 # Maximum airspeed
-var max_flight_speed = 30
+export var max_flight_speed = 30
 # Turn rate
-var turn_speed = 0.75
+export var turn_speed = 0.75
 # Climb/dive rate
-var pitch_speed = 0.5
+export var pitch_speed = 0.5
 # Wings "autolevel" speed
-var level_speed = 3.0
+export var level_speed = 3.0
 # Throttle change speed
-var throttle_delta = 30
+export var throttle_delta = 30
 # Acceleration/deceleration
-var acceleration = 6.0
+export var acceleration = 6.0
 
 # Current speed
 var forward_speed = 0
