@@ -9,23 +9,23 @@
 [ext_resource path="res://scenes/games/test-takeoff/Test-TakeOff.gd" type="Script" id=7]
 [ext_resource path="res://scenes/games/test-takeoff/CessnaPathFollow.gd" type="Script" id=8]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="SphereShape" id=1]
+radius = 0.1
+
+[sub_resource type="PlaneMesh" id=2]
 size = Vector2( 1000, 1000 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.152941, 0.356863, 0.0980392, 1 )
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 500, 1, 500 )
 
-[sub_resource type="PlaneMesh" id=4]
+[sub_resource type="PlaneMesh" id=5]
 size = Vector2( 100, 30 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.305882, 0.305882, 0.305882, 1 )
-
-[sub_resource type="SphereShape" id=6]
-radius = 0.1
 
 [sub_resource type="CapsuleMesh" id=7]
 radius = 0.1
@@ -240,32 +240,32 @@ background_sky = SubResource( 33 )
 [node name="Test-TakeOff" type="Spatial"]
 script = ExtResource( 7 )
 
-[node name="Level" type="Spatial" parent="."]
-
-[node name="Ground" type="MeshInstance" parent="Level"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="StaticBody" type="StaticBody" parent="Level/Ground"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Level/Ground/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.679, 0.0844593, 0 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
 [node name="Cessna" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.79416, 1.96763, 0 )
+transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, 4.79416, 1.96763, 1.11759e-08 )
 path_follow_path = NodePath("../Path/CessnaPathFollow")
 
 [node name="CessnaJoint" type="StaticBody" parent="Cessna"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55026, 1.54949, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cessna/CessnaJoint"]
-shape = SubResource( 6 )
+shape = SubResource( 1 )
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="Ground" type="MeshInstance" parent="Level"]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Ground"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Ground/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.679, 0.0844593, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.993855, 0.110688, 0, -0.110688, 0.993855, 0, 6, 27 )
