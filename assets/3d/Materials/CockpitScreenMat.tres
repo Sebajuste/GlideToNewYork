@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/3d/Shaders/CockpitScreenShader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/3d/Textures/FakeRenderTexture.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/intensity = 0.5
+shader_param/RenderTarget = ExtResource( 2 )
