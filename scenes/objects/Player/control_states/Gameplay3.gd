@@ -1,6 +1,8 @@
 extends PlayerState
 
 
+var previous_camera
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +12,28 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func enter(_msg: Dictionary = {}):
+	
+	player.skin.get_node("Glider").visible = false
+	player.skin.get_node("Cockpit").visible = true
+	
+	previous_camera = get_viewport().get_camera()
+	
+	player.skin.get_node("Cockpit").enable()
+	
+	pass
+
+
+func exit():
+	
+	player.skin.get_node("Glider").visible = true
+	player.skin.get_node("Cockpit").visible = false
+	
+	previous_camera.current = true
+	
+	pass
+
 
 func physics_process(delta):
 	

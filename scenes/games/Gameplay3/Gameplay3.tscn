@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/levels/Manhattan/Manhattan.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/games/Gameplay3/ground_grid.material" type="Material" id=2]
 [ext_resource path="res://scenes/games/Gameplay3/building_grid.material" type="Material" id=3]
 [ext_resource path="res://scenes/games/Gameplay3/wtc_grid.material" type="Material" id=4]
 [ext_resource path="res://scenes/objects/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/objects/StrobeLight/StrobeLight.tscn" type="PackedScene" id=6]
 
 [sub_resource type="QuadMesh" id=1]
 size = Vector2( 6000, 6000 )
@@ -15,6 +16,11 @@ albedo_color = Color( 0.0392157, 0.0392157, 0.0392157, 1 )
 [sub_resource type="Environment" id=3]
 background_mode = 1
 ambient_light_energy = 0.0
+glow_enabled = true
+glow_intensity = 5.86
+glow_strength = 0.7
+glow_bloom = 0.81
+glow_blend_mode = 0
 
 [node name="Gameplay3" type="Spatial"]
 
@@ -43,8 +49,11 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -10.
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
+[node name="StrobeLight" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1322.4, 535.467, 350.226 )
+
 [node name="Player" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.779294, 0, -0.626658, 0, 1, 0, 0.626658, 0, 0.779294, -1752.47, 234.912, 1703.41 )
+transform = Transform( 0.808771, 0, 0.588124, 0, 1, 0, -0.588124, 0, 0.808771, 443.677, 310.817, 1604.12 )
 control_mode = "Gameplay3"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
