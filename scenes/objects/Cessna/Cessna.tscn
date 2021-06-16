@@ -1,25 +1,26 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/objects/Cessna/Cessna.gd" type="Script" id=1]
 [ext_resource path="res://assets/3d/vehicules/Cessna/Cessna.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sounds/cessna_engine.ogg" type="AudioStream" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.78032, 1.18937, 0.749685 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 4.13125, 0.528059, 0.749685 )
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.946814, 0.236737, 6.93373 )
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.756325, 1.23186, 2.05053 )
 
-[sub_resource type="SphereMesh" id=2]
+[sub_resource type="SphereMesh" id=5]
 radius = 0.05
 height = 0.1
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 1, 0, 0, 1 )
 metallic = 0.5
 roughness = 0.17
@@ -29,11 +30,11 @@ emission_energy = 2.43
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="SphereMesh" id=4]
+[sub_resource type="SphereMesh" id=7]
 radius = 0.05
 height = 0.1
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=8]
 albedo_color = Color( 0.0862745, 0.784314, 0.113725, 1 )
 metallic = 0.41
 roughness = 0.12
@@ -43,7 +44,7 @@ emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -87,20 +88,20 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83208, 1.42748, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.436481, 2.33928, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
 transform = Transform( 0.905665, -0.423994, 0, 0.423994, 0.905665, 0, 0, 0, 1, -6.09072, 2.62515, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 4 )
 
 [node name="RedCollisionLight" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115613, 2.37043, -6.89833 )
-mesh = SubResource( 2 )
-material/0 = SubResource( 3 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="OmniLight" type="OmniLight" parent="RedCollisionLight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201424, -0.179703 )
@@ -109,8 +110,8 @@ omni_range = 1.0
 
 [node name="GreenCollisionLight" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.176085, 2.35701, 6.92577 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
 
 [node name="OmniLight" type="OmniLight" parent="GreenCollisionLight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.220658, 0.255277 )
@@ -127,6 +128,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.383808, 2.27969, -7.27737 )
 visible = false
 light_energy = 2.31
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22878, 0 )
+stream = ExtResource( 3 )
+unit_db = 40.0
+pitch_scale = 1.2
+autoplay = true
+max_distance = 200.0
+doppler_tracking = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "probes"
-anims/probes = SubResource( 6 )
+anims/probes = SubResource( 9 )

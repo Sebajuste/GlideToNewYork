@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
+
+[ext_resource path="res://assets/3d/Shaders/CockpitShader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/3d/Textures/Cockpit_D.png" type="Texture" id=2]
+[ext_resource path="res://assets/3d/Textures/Cockpit_E.png" type="Texture" id=3]
+[ext_resource path="res://assets/3d/Textures/Cockpit_M.png" type="Texture" id=4]
+[ext_resource path="res://assets/3d/Textures/Cockpit_R.png" type="Texture" id=5]
+[ext_resource path="res://assets/3d/Textures/Cockpit_A.png" type="Texture" id=6]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/Diffuse = ExtResource( 2 )
+shader_param/AlphaMap = ExtResource( 6 )
+shader_param/Metallic = ExtResource( 4 )
+shader_param/Rougness = ExtResource( 5 )
+shader_param/EmissionMap = ExtResource( 3 )

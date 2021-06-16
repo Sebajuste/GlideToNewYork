@@ -15,7 +15,8 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _physics_process(delta):
+
+func _on_Area_body_entered(body):
 	
-	pass
+	LevelManager.next_level()
 	

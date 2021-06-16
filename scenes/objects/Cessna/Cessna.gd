@@ -17,7 +17,6 @@ var acceleration : Vector3 = Vector3.ZERO
 
 func _ready():
 	position = self.global_transform.origin
-	path_follow.offset = look_ahead_distance
 	pass
 
 func _apply_force(force : Vector3):

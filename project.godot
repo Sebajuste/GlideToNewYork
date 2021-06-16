@@ -45,8 +45,12 @@ _global_script_class_icons={
 [application]
 
 config/name="gamejam-newyork"
-run/main_scene="res://scenes/games/test-takeoff/Test-TakeOff.tscn"
+run/main_scene="res://scenes/games/Main/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+LevelManager="*res://scripts/singletons/LevelManager.gd"
 
 [input]
 
@@ -77,4 +81,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"
