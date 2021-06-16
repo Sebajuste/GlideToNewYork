@@ -16,8 +16,6 @@ func _ready():
 
 
 func _generate_curve(newOrigin : Vector3):
-	print("new curve")
-	
 	# move the origin of the new curve, add a first point at position 0, 0, 0.
 	global_transform.origin = newOrigin
 	var curve := Curve3D.new()

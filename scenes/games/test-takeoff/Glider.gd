@@ -1,27 +1,11 @@
 extends RigidBody
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	pass
 
 func _physics_process(delta):
-	
-	#global_transform.basis = Basis()
-	
-	#print("vspeed: ", linear_velocity.y)
-	
 	pass
 
 
@@ -49,3 +33,9 @@ func _integrate_forces(state : PhysicsDirectBodyState) -> void:
 	old_linear_velocity = state.linear_velocity
 	
 	pass
+
+
+func _on_Cessna_first_move(v : Vector3):
+	set_linear_velocity(v)
+	pass
+	

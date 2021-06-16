@@ -310,3 +310,6 @@ light_specular = 0.0
 
 [node name="Manhattan" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2100, 0, 0 )
+
+[connection signal="first_move" from="Cessna" to="Glider" method="_on_Cessna_first_move"]
+[connection signal="end_of_path" from="Path/CessnaPathFollow" to="Cessna" method="_on_CessnaPathFollow_end_of_path"]
