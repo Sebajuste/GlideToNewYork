@@ -130,7 +130,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( 333.978, 120 )
+graph_offset = Vector2( 642.24, -150 )
 nodes/fragment/0/position = Vector2( 1280, 40 )
 nodes/fragment/2/node = SubResource( 8 )
 nodes/fragment/2/position = Vector2( 1020, -120 )
@@ -166,7 +166,6 @@ nodes/fragment/connections = PoolIntArray( 8, 2, 7, 2, 9, 0, 12, 0, 11, 0, 12, 1
 
 [sub_resource type="OpenSimplexNoise" id=19]
 octaves = 4
-period = 32.0
 
 [sub_resource type="NoiseTexture" id=20]
 seamless = true

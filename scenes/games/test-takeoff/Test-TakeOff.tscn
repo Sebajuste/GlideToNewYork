@@ -7,25 +7,27 @@
 [ext_resource path="res://scenes/objects/clouds/worley-cloud/WorleyCloud.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/games/test-takeoff/Camera.gd" type="Script" id=6]
 [ext_resource path="res://scenes/games/test-takeoff/Test-TakeOff.gd" type="Script" id=7]
-[ext_resource path="res://scenes/objects/environments/Night/Night.tres" type="Environment" id=8]
+[ext_resource path="res://scenes/games/test-takeoff/CessnaPathFollow.gd" type="Script" id=8]
+[ext_resource path="res://scenes/games/test-takeoff/Path.gd" type="Script" id=9]
+[ext_resource path="res://scenes/levels/Manhattan/Manhattan.tscn" type="PackedScene" id=10]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="SphereShape" id=1]
+radius = 0.1
+
+[sub_resource type="PlaneMesh" id=2]
 size = Vector2( 1000, 1000 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.152941, 0.356863, 0.0980392, 1 )
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 500, 1, 500 )
 
-[sub_resource type="PlaneMesh" id=4]
+[sub_resource type="PlaneMesh" id=5]
 size = Vector2( 100, 30 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.305882, 0.305882, 0.305882, 1 )
-
-[sub_resource type="SphereShape" id=6]
-radius = 0.1
 
 [sub_resource type="CapsuleMesh" id=7]
 radius = 0.1
@@ -47,40 +49,35 @@ _data = {
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="CubeMesh" id=13]
-
-[sub_resource type="BoxShape" id=12]
-extents = Vector3( 10, 60, 30 )
-
 [node name="Test-TakeOff" type="Spatial"]
 script = ExtResource( 7 )
 
-[node name="Level" type="Spatial" parent="."]
-
-[node name="Ground" type="MeshInstance" parent="Level"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="StaticBody" type="StaticBody" parent="Level/Ground"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Level/Ground/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Level"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.679, 0.0844593, 0 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
 [node name="Cessna" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.79416, 1.96763, 0 )
+transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, 4.79416, 1.96763, 1.11759e-08 )
 path_follow_path = NodePath("../Path/CessnaPathFollow")
 
 [node name="CessnaJoint" type="StaticBody" parent="Cessna"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55026, 1.54949, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cessna/CessnaJoint"]
-shape = SubResource( 6 )
+shape = SubResource( 1 )
+
+[node name="Level" type="Spatial" parent="."]
+
+[node name="Ground" type="MeshInstance" parent="Level"]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="Level/Ground"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/Ground/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Level"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.679, 0.0844593, 0 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.993855, 0.110688, 0, -0.110688, 0.993855, 0, 6, 27 )
@@ -269,20 +266,23 @@ shape = SubResource( 10 )
 
 [node name="Player" parent="Glider" instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+collision_layer = 0
+collision_mask = 0
 
 [node name="Path" type="Path" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05114, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.051, 0 )
 curve = SubResource( 11 )
+script = ExtResource( 9 )
 
 [node name="CessnaPathFollow" type="PathFollow" parent="Path"]
-transform = Transform( 0.957011, 0.289921, -0.00864401, -0.289894, 0.957049, 0.00424859, 0.00950458, -0.0015601, 0.999954, -0.018528, -0.954168, -0.0578613 )
+transform = Transform( 0.501845, 0.864913, -0.00846488, -0.864869, 0.501907, 0.00932743, 0.0123161, 0.00264007, 0.999925, -0.018528, -0.954168, -0.0578613 )
 loop = false
+script = ExtResource( 8 )
 
 [node name="Water" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 8 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.533359, 0.594501, -0.601745, -0.744347, 0.667794, -1.14073e-08, 0.401842, 0.447907, 0.798688, 0, 2.96261, 0 )
@@ -291,16 +291,18 @@ light_energy = 2.06
 light_indirect_energy = 3.86
 light_specular = 0.0
 
+[node name="Manhattan" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2100, 0, 0 )
+
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 752.918, 145.893, 0 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="MeshInstance" type="MeshInstance" parent="Area"]
-mesh = SubResource( 13 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 12 )
 
+[connection signal="first_move" from="Cessna" to="Glider" method="_on_Cessna_first_move"]
+[connection signal="end_of_path" from="Path/CessnaPathFollow" to="Cessna" method="_on_CessnaPathFollow_end_of_path"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
