@@ -26,6 +26,7 @@ script = ExtResource( 3 )
 
 [node name="Cockpit" parent="Skin" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107738, -0.605816 )
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037478, 3.35636 )

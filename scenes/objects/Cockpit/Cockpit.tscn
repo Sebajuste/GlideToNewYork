@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/3d/Cockpit/Cockpit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/3d/Shaders/CockpitScreenShader.tres" type="Shader" id=2]
 [ext_resource path="res://scenes/objects/Cockpit/Cockpit.gd" type="Script" id=3]
+[ext_resource path="res://assets/themes/cockpit-screen.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/objects/Cockpit/MainScreenCockpit.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("LeftCameraViewport")
@@ -99,6 +101,9 @@ fxaa = true
 render_target_v_flip = true
 gui_disable_input = true
 
+[node name="MainScreenCockpit" parent="FrontCameraViewport" instance=ExtResource( 5 )]
+altitude = 0
+
 [node name="Camera" type="Camera" parent="FrontCameraViewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5 )
 near = 1.0
@@ -113,6 +118,26 @@ transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 3.5, 0, 0.6
 near = 1.0
 far = 5000.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="RightCameraViewport"]
+
+[node name="Control" type="Control" parent="RightCameraViewport/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RightCameraViewport/CanvasLayer/Control"]
+anchor_right = 1.0
+margin_bottom = 129.0
+theme = ExtResource( 4 )
+text = "RIGHT VIEW"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LeftCameraViewport" type="Viewport" parent="."]
 size = Vector2( 1024, 1024 )
 render_target_v_flip = true
@@ -121,6 +146,26 @@ render_target_v_flip = true
 transform = Transform( 0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -3.5, 0, 0.6 )
 near = 1.0
 far = 5000.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="LeftCameraViewport"]
+
+[node name="Control" type="Control" parent="LeftCameraViewport/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LeftCameraViewport/CanvasLayer/Control"]
+anchor_right = 1.0
+margin_bottom = 129.0
+theme = ExtResource( 4 )
+text = "LEFT VIEW"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FrontCameraPosition" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5 )

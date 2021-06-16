@@ -57,6 +57,9 @@ func _unhandled_input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	$Skin/Cockpit.altitude = self.global_transform.origin.y
+	$Skin/Cockpit.air_speed = self.velocity.length()
+	
 	pass
 
 

@@ -27,6 +27,15 @@ func _ready():
 #	pass
 
 
+func _unhandled_input(event):
+	
+	if Input.is_action_just_pressed("next_level"):
+		
+		go_to_next_level()
+		
+	
+
+
 func go_to_next_level():
 	current_level_index = current_level_index +1
 	load_level(current_level_index)
