@@ -10,7 +10,7 @@ albedo_color = Color( 0.152941, 0.356863, 0.0980392, 1 )
 extents = Vector3( 500, 1, 500 )
 
 [sub_resource type="PlaneMesh" id=4]
-size = Vector2( 100, 30 )
+size = Vector2( 150, 30 )
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.305882, 0.305882, 0.305882, 1 )
@@ -28,7 +28,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0807, 0.0844593, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5462, 0.0844593, 0 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 
