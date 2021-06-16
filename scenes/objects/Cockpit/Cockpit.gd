@@ -12,16 +12,19 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _physics_process(delta):
+func _process(delta):
 	
 	$FrontCameraViewport/Camera.global_transform = $FrontCameraPosition.global_transform
 	$RightCameraViewport/Camera.global_transform = $RightCameraPosition.global_transform
 	$LeftCameraViewport/Camera.global_transform = $LeftCameraPosition.global_transform
 	
+	pass
+
+
+func _physics_process(delta):
+	
+	
+	pass
 
 
 func enable():
