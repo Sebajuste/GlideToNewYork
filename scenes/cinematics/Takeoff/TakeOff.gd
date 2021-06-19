@@ -11,6 +11,8 @@ func _ready():
 	
 	$AnimationPlayer.play("takeoff")
 	
+	$Cessna.set_physics_process(false)
+	
 	pass # Replace with function body.
 
 

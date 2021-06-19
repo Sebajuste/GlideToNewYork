@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/games/Gameplay1/Camera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/games/Gameplay1/Glider.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/levels/Airport/Airport.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/levels/Manhattan/Manhattan.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/games/Gameplay1/Gameplay1.gd" type="Script" id=9]
+[ext_resource path="res://scenes/objects/environments/Night/Night.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.1
@@ -29,8 +30,8 @@ height = 2.0
 
 [sub_resource type="Curve3D" id=6]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.018528, -0.954168, -0.0578613, 0, 0, 0, 0, 0, 0, 52.8366, -0.828917, 0.0275879, -19.6203, -1.05738, 0, 19.6203, 1.05738, 0, 80.0825, 0.584497, 0.0717773, -57.2763, -11.2675, 0, 57.2763, 11.2675, 0, 169.246, 13.0476, 0.0449219, -157.119, -37.9979, 7.65026e-05, 157.119, 37.9979, -7.65026e-05, 515.672, 122.38, -0.164139, 0, 0, 0, 0, 0, 0, 819.794, 141.544, 0.287979 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.018528, -0.954168, -0.0578613, 0, 0, 0, 0, 0, 0, 52.8366, -0.828917, 0.0275879, -19.6203, -1.05738, 0, 19.6203, 1.05738, 0, 80.0825, 0.584497, 0.0717773, -57.2763, -11.2675, 0, 57.2763, 11.2675, 0, 169.246, 13.0476, 0.0449219, -157.119, -37.9979, 7.65026e-05, 157.119, 37.9979, -7.65026e-05, 515.672, 122.38, -0.164139, 0, 0, 0, 0, 0, 0, 839.344, 155.708, 0.287842, -917.682, 32.6846, -0.000244141, 917.682, -32.6846, 0.000244141, 2852.76, 245.682, 0.288086 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0 )
 }
 
 [sub_resource type="BoxShape" id=7]
@@ -40,16 +41,19 @@ extents = Vector3( 1, 500, 50 )
 script = ExtResource( 9 )
 
 [node name="Manhattan" parent="." instance=ExtResource( 8 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3858.63, -13.406, -4552.39 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5066.63, -13.406, -4552.39 )
 
 [node name="Manhattan2" parent="." instance=ExtResource( 8 )]
-transform = Transform( 0.999344, 0, 0.0362077, 0, 1, 0, -0.0362077, 0, 0.999344, -3238.28, -13.406, -3053.75 )
+transform = Transform( 0.999344, 0, 0.0362077, 0, 1, 0, -0.0362077, 0, 0.999344, -1610.47, -13.406, -2683.62 )
+
+[node name="Manhattan3" parent="." instance=ExtResource( 8 )]
+transform = Transform( -0.0112572, 0, 0.999936, 0, 1, 0, -0.999936, 0, -0.0112572, 1870.05, -13.7235, 4371.03 )
 
 [node name="Airport" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, 0, 0, 0 )
+transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, -104.562, -13.4719, -1.15825e-16 )
 
 [node name="Cessna" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, 4.79416, 0.105923, 1.11759e-08 )
+transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, 4.79416, -13.323, 1.11759e-08 )
 max_force = 0.1
 path_follow_path = NodePath("../Path/CessnaPathFollow")
 acceleration = 0.1
@@ -61,7 +65,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55026, 1.54949, 0 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.993855, 0.110688, 0, -0.110688, 0.993855, 0, 6, 27 )
+transform = Transform( 1, 0, 0, 0, 0.993855, 0.110688, 0, -0.110688, 0.993855, 0, -7.42888, 27 )
 current = true
 near = 1.0
 far = 5000.0
@@ -69,7 +73,7 @@ script = ExtResource( 1 )
 camera_speed = 5.0
 
 [node name="Glider" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3748, 2.13673, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3748, -11.2922, 0 )
 collision_layer = 2
 mass = 20.0
 gravity_scale = 0.0
@@ -91,7 +95,7 @@ collision_mask = 0
 control_mode = "Gameplay1"
 
 [node name="Chain" type="Spatial" parent="."]
-transform = Transform( 0.992217, 0.124519, 0, -0.124519, 0.992217, 0, 0, 0, 1, -2.08668, -1.39611, 0 )
+transform = Transform( 0.992217, 0.124519, 0, -0.124519, 0.992217, 0, 0, 0, 1, -2.08668, -14.825, 0 )
 
 [node name="RigidBody" type="RigidBody" parent="Chain"]
 transform = Transform( -3.60255e-08, -0.566349, 0.824166, -2.47559e-08, 0.824166, 0.566349, -1, 0, -4.37114e-08, -0.879494, 2.96279, 0 )
@@ -257,6 +261,8 @@ script = ExtResource( 3 )
 transform = Transform( 0.501845, 0.864913, -0.00846488, -0.864869, 0.501907, 0.00932743, 0.0123161, 0.00264007, 0.999925, -0.018528, -0.954168, -0.0578613 )
 loop = false
 script = ExtResource( 4 )
+
+[node name="NightWorldEnvironment" parent="." instance=ExtResource( 10 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
