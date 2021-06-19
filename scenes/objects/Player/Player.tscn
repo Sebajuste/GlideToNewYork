@@ -63,3 +63,8 @@ pitch_scale = 0.6
 autoplay = true
 max_distance = 200.0
 bus = "effects"
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -3, 0 )
+collision_mask = 5

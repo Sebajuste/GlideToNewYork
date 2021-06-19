@@ -22,7 +22,7 @@ func next_level():
 	pass
 
 
-func restart_level():
+func restart_level(cause = ""):
 	
-	emit_signal("restart_level_called")
+	emit_signal("restart_level_called", cause)
 	

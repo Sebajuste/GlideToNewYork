@@ -19,6 +19,7 @@ export var level_speed = 3.0
 export var throttle_delta = 30
 # Acceleration/deceleration
 export var acceleration = 6.0
+export var deceleration = 0.5
 
 # Current speed
 var forward_speed = 0
@@ -35,7 +36,7 @@ export(String, "None", "Gameplay1", "Gameplay2", "Gameplay3") var control_mode =
 
 onready var skin := $Skin
 onready var control: StateMachine = $ControlSM
-
+onready var raycast_down : RayCast = $RayCast
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,5 +56,3 @@ func set_control_mode(value):
 	if control:
 		print("set control to %s" % value)
 		control.transition_to("Control/%s" % value)
-
-

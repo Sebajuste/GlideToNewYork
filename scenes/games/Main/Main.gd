@@ -12,6 +12,9 @@ onready var root := $Level
 onready var countdown := $CanvasLayer/Control/Countdown
 
 
+var next_level
+
+
 var hours := 0
 var minutes := 0
 var seconds := 0
@@ -46,6 +49,8 @@ func go_to_next_level():
 	current_level_index = current_level_index +1
 	load_level(current_level_index)
 	
+	$AnimationPlayer.play("fadeIn")
+	
 	# save time
 	hours = countdown.hours
 	minutes = countdown.minutes
@@ -54,7 +59,14 @@ func go_to_next_level():
 	pass
 
 
-func restart_level():
+func restart_level(cause):
+	
+	$AnimationPlayer.play("fadeIn")
+	
+	if cause != "":
+		$CanvasLayer/Cause.text = cause
+		$CanvasLayer/Cause.visible = true
+	
 	
 	load_level(current_level_index)
 	
@@ -72,17 +84,29 @@ func load_level(index : int):
 			var level_path : String = level_paths[index]
 			
 			var next_level_resource = load("res://%s" % level_path)
-			var next_level = next_level_resource.instance()
+			next_level = next_level_resource.instance()
 			
-			for child in root.get_children():
-				child.queue_free()
+			$StartTimer.start()
 			
-			root.add_child(next_level)
 			
 		else:
 			push_error("Invalid index %d to load level" % index)
 		
 	else:
 		push_error("Invalid levels config")
+	
+
+
+func start_level_loaded():
+	
+	if next_level:
+		for child in root.get_children():
+			child.queue_free()
+		
+		root.add_child(next_level)
+		next_level = null
+		
+		$AnimationPlayer.play("fadeOut")
+		$CanvasLayer/Cause.visible = false
 	
 
