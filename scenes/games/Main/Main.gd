@@ -12,7 +12,12 @@ onready var root := $Level
 onready var countdown := $CanvasLayer/Control/Countdown
 
 
-var next_level
+var loading := false
+
+
+var loader : ResourceInteractiveLoader
+
+var next_level = null
 
 
 var hours := 0
@@ -28,12 +33,20 @@ func _ready():
 	LevelManager.connect("next_level_called", self, "go_to_next_level")
 	LevelManager.connect("restart_level_called", self, "restart_level")
 	
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	
+	if loader:
+		var result = loader.poll()
+		if result == ERR_FILE_EOF:
+			var next_level_resource = loader.get_resource()
+			next_level = next_level_resource.instance()
+			loader = null
+			$StartTimer.start()
+		
+	
 
 
 func _unhandled_input(event):
@@ -42,10 +55,13 @@ func _unhandled_input(event):
 		
 		go_to_next_level()
 		
-	
 
 
 func go_to_next_level():
+	
+	if loading:
+		return
+	
 	current_level_index = current_level_index +1
 	load_level(current_level_index)
 	
@@ -56,7 +72,6 @@ func go_to_next_level():
 	minutes = countdown.minutes
 	seconds = countdown.seconds
 	
-	pass
 
 
 func restart_level(cause):
@@ -83,11 +98,15 @@ func load_level(index : int):
 		if index < level_paths.size():
 			var level_path : String = level_paths[index]
 			
-			var next_level_resource = load("res://%s" % level_path)
-			next_level = next_level_resource.instance()
+			loader = ResourceLoader.load_interactive("res://%s" % level_path)
 			
-			$StartTimer.start()
+			print("loader created", loader)
 			
+			#var next_level_resource = load("res://%s" % level_path)
+			#next_level = next_level_resource.instance()
+			
+			
+			loading = true
 			
 		else:
 			push_error("Invalid index %d to load level" % index)
@@ -100,13 +119,20 @@ func load_level(index : int):
 func start_level_loaded():
 	
 	if next_level:
-		for child in root.get_children():
-			child.queue_free()
+		
+		_clean_scene()
 		
 		root.add_child(next_level)
 		next_level = null
 		
 		$AnimationPlayer.play("fadeOut")
 		$CanvasLayer/Cause.visible = false
-	
+		
+		loading = false
 
+
+func _clean_scene():
+	
+	for child in root.get_children():
+		child.queue_free()
+	

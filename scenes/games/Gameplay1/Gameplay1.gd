@@ -4,13 +4,16 @@ extends Spatial
 export var max_force := 5.0
 
 
+onready var force_bar := $CanvasLayer/UI/Force/VBoxContainer/ProgressBar
+
+
 var started := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	$CanvasLayer/UI/Force/ProgressBar.max_value = (max_force / 3) * 2
+	force_bar.max_value = (max_force / 3) * 2
 	
 	pass # Replace with function body.
 
@@ -30,7 +33,7 @@ func _on_Glider_force_updated(force):
 				chain.get_node("PinJoint7").queue_free()
 			$RestartTimer.start()
 		
-		$CanvasLayer/UI/Force/ProgressBar.value = force
+		force_bar.value = force
 	
 
 
@@ -50,4 +53,3 @@ func _on_RestartTimer_timeout():
 	
 	LevelManager.restart_level("Le câble a cassé, car trop de force a été exercé sur lui.")
 	
-	pass # Replace with function body.

@@ -7,6 +7,10 @@ extends Spatial
 
 onready var player := $Player
 
+
+var height_limited := true
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -22,8 +26,27 @@ func _physics_process(delta):
 		
 		var collider = player.raycast_down.get_collider()
 		
-		print("FINISH : ", collider.is_in_group("wtc") )
+		if collider.is_in_group("wtc"):
+			LevelManager.next_level()
 		
-		pass
 	
+	if player.global_transform.origin.y > 200 and height_limited:
+		print("Glider spotted")
+		LevelManager.restart_level("Votre planneur a été repéré")
+		
+	
+
+
+func _on_Area_body_entered(body):
+	
+	height_limited = false
+	
+
+
+
+
+
+func _on_Area_body_exited(body):
+	
+	height_limited = true
 	

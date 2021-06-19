@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/games/Gameplay1/Camera.gd" type="Script" id=1]
 [ext_resource path="res://scenes/games/Gameplay1/Glider.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://scenes/levels/Manhattan/Manhattan.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/games/Gameplay1/Gameplay1.gd" type="Script" id=9]
 [ext_resource path="res://scenes/objects/environments/Night/Night.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/2d/icons/Arrow_Down_Key_Light.png" type="Texture" id=11]
+[ext_resource path="res://assets/2d/icons/Arrow_Up_Key_Light.png" type="Texture" id=12]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.1
@@ -262,6 +264,22 @@ transform = Transform( 0.501845, 0.864913, -0.00846488, -0.864869, 0.501907, 0.0
 loop = false
 script = ExtResource( 4 )
 
+[node name="StartArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.696, 45.1735, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="StartArea"]
+shape = SubResource( 7 )
+
+[node name="EndArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4200, 500, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="EndArea"]
+shape = SubResource( 7 )
+
 [node name="NightWorldEnvironment" parent="." instance=ExtResource( 10 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -304,7 +322,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -350.0
+margin_left = -292.0
 margin_top = -170.0
 margin_right = -20.0
 margin_bottom = -20.0
@@ -313,57 +331,83 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Helper"]
-margin_right = 330.0
+margin_right = 272.0
 margin_bottom = 150.0
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/Helper/VBoxContainer"]
-margin_top = 136.0
-margin_right = 330.0
-margin_bottom = 150.0
-alignment = 2
+[node name="PitchUp" type="HBoxContainer" parent="CanvasLayer/UI/Helper/VBoxContainer"]
+margin_top = 86.0
+margin_right = 272.0
+margin_bottom = 116.0
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/UI/Helper/VBoxContainer/HBoxContainer"]
-margin_left = 276.0
-margin_right = 330.0
-margin_bottom = 14.0
-text = "Pitch UP"
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/Helper/VBoxContainer/PitchUp"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+texture = ExtResource( 11 )
+expand = true
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Helper/VBoxContainer/PitchUp"]
+margin_left = 34.0
+margin_right = 272.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Tirer le manche / Relever le nez"
+valign = 1
+
+[node name="PitchDown" type="HBoxContainer" parent="CanvasLayer/UI/Helper/VBoxContainer"]
+margin_top = 120.0
+margin_right = 272.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/Helper/VBoxContainer/PitchDown"]
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Helper/VBoxContainer/PitchDown"]
+margin_left = 34.0
+margin_right = 272.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Pousser le manche / Baisser le nez"
+valign = 1
 
 [node name="Force" type="MarginContainer" parent="CanvasLayer/UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
-margin_top = -47.0
+margin_top = -68.0
 margin_right = 206.0
 margin_bottom = -20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI/Force"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Force"]
 margin_right = 186.0
-margin_bottom = 27.0
+margin_bottom = 48.0
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Force/VBoxContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+text = "Force sur le cable :"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI/Force/VBoxContainer"]
+margin_top = 18.0
+margin_right = 186.0
+margin_bottom = 48.0
 grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_value = 5.0
 percent_visible = false
-
-[node name="StartArea" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 231.696, 45.1735, 0 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="StartArea"]
-shape = SubResource( 7 )
-
-[node name="EndArea" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4200, 500, 0 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="EndArea"]
-shape = SubResource( 7 )
 
 [node name="RestartTimer" type="Timer" parent="."]
 wait_time = 4.0

@@ -13,6 +13,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
+
 func enter(_msg: Dictionary = {}):
 	
 	player.skin.get_node("Glider").visible = false
@@ -53,8 +54,6 @@ func physics_process(delta):
 		player.skin.rotation.z = 0
 	else:
 		player.skin.rotation.z = lerp(player.skin.rotation.z, player.turn_input, player.level_speed * delta)
-	
-	print("on floor : ", player.is_on_floor(),", ray: ", player.raycast_down.is_colliding() )
 	
 	if player.raycast_down.is_colliding():
 		

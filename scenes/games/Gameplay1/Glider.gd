@@ -34,9 +34,11 @@ func _unhandled_input(event):
 
 func _integrate_forces(state : PhysicsDirectBodyState) -> void:
 	
-	var pitch_up := Input.get_action_strength("pitch_up")
+	var pitch_input := Input.get_action_strength("pitch_up")
+	pitch_input -= Input.get_action_strength("pitch_down")
 	
-	add_central_force(Vector3.UP * pitch_up * 100)
+	
+	add_central_force(Vector3.UP * pitch_input * 100)
 	
 	state.angular_velocity = Vector3.ZERO
 	state.linear_velocity.z = 0

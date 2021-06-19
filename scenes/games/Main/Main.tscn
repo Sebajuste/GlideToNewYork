@@ -8,6 +8,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "fadeIn"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/Panel:modulate")
 tracks/0/interp = 1
@@ -19,6 +20,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_clean_scene"
+} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -103,7 +118,7 @@ anims/fadeIn = SubResource( 1 )
 anims/fadeOut = SubResource( 2 )
 
 [node name="StartTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
