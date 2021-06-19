@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/objects/Player/control_states/Control.gd" type="Script" id=1]
 [ext_resource path="res://scripts/miscs/state_machine/state_machine.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/objects/Player/control_states/None.gd" type="Script" id=6]
 [ext_resource path="res://scenes/objects/Player/control_states/Gameplay2.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/glider.ogg" type="AudioStream" id=8]
+[ext_resource path="res://scenes/objects/Cockpit/Cockpit.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/objects/Player/control_states/Gameplay1.gd" type="Script" id=10]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.542182, 0.937697, 6.01239 )
@@ -22,6 +24,10 @@ script = ExtResource( 3 )
 [node name="Skin" type="Spatial" parent="."]
 
 [node name="Glider" parent="Skin" instance=ExtResource( 4 )]
+
+[node name="Cockpit" parent="Skin" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107738, -0.605816 )
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037478, 3.35636 )
@@ -42,6 +48,7 @@ script = ExtResource( 1 )
 script = ExtResource( 6 )
 
 [node name="Gameplay1" type="Node" parent="ControlSM/Control"]
+script = ExtResource( 10 )
 
 [node name="Gameplay2" type="Node" parent="ControlSM/Control"]
 script = ExtResource( 7 )
@@ -56,3 +63,8 @@ pitch_scale = 0.6
 autoplay = true
 max_distance = 200.0
 bus = "effects"
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -3, 0 )
+collision_mask = 5

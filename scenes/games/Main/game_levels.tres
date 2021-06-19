@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-level_paths = [ "scenes/cinematics/Takeoff/TakeOff.tscn", "scenes/games/test-takeoff/Test-TakeOff.tscn", "scenes/cinematics/Approach/Approach.tscn", "scenes/games/Gameplay2/Gameplay2.tscn", "scenes/cinematics/Flyover/Flyover.tscn", "scenes/games/Gameplay3/Gameplay3.tscn" ]
+level_paths = [ "scenes/cinematics/Takeoff/TakeOff.tscn", "scenes/games/Gameplay1/Gameplay1.tscn", "scenes/cinematics/Approach/Approach.tscn", "scenes/games/Gameplay2/Gameplay2.tscn", "scenes/cinematics/Flyover/Flyover.tscn", "scenes/games/Gameplay3/Gameplay3.tscn", "scenes/cinematics/LandingWTC/LandingWTC.tscn" ]

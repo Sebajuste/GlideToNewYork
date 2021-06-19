@@ -14,3 +14,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func physics_process(delta):
+	
+	player.global_transform.basis = Basis(Vector3.UP, deg2rad(-90) )
+	
+	

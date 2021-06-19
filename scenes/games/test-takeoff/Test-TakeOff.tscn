@@ -3,11 +3,11 @@
 [ext_resource path="res://scenes/objects/Cessna/Cessna.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/objects/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/objects/Water/Water.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/games/test-takeoff/Glider.gd" type="Script" id=4]
+[ext_resource path="res://scenes/games/Gameplay1/Glider.gd" type="Script" id=4]
 [ext_resource path="res://scenes/objects/clouds/worley-cloud/WorleyCloud.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/games/test-takeoff/Camera.gd" type="Script" id=6]
+[ext_resource path="res://scenes/games/Gameplay1/Camera.gd" type="Script" id=6]
 [ext_resource path="res://scenes/games/test-takeoff/Test-TakeOff.gd" type="Script" id=7]
-[ext_resource path="res://scenes/games/test-takeoff/CessnaPathFollow.gd" type="Script" id=8]
+[ext_resource path="res://scenes/games/Gameplay1/CessnaPathFollow.gd" type="Script" id=8]
 [ext_resource path="res://scenes/games/test-takeoff/Path.gd" type="Script" id=9]
 [ext_resource path="res://scenes/levels/Manhattan/Manhattan.tscn" type="PackedScene" id=10]
 
@@ -55,6 +55,7 @@ script = ExtResource( 7 )
 [node name="Cessna" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 1.98997e-08, 4.65661e-10, -3.98431e-08, 1, 0, 4.65661e-10, 0, 1, 4.79416, 1.96763, 1.11759e-08 )
 path_follow_path = NodePath("../Path/CessnaPathFollow")
+acceleration = 0.1
 
 [node name="CessnaJoint" type="StaticBody" parent="Cessna"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55026, 1.54949, 0 )

@@ -2,6 +2,7 @@ extends Node
 
 
 signal next_level_called
+signal restart_level_called
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,3 +22,7 @@ func next_level():
 	pass
 
 
+func restart_level(cause = ""):
+	
+	emit_signal("restart_level_called", cause)
+	

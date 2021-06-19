@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/themes/cockpit-screen.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/objects/Cockpit/MainScreenCockpit.gd" type="Script" id=2]
+
+[node name="MainScreenCockpit" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+anchor_right = 1.0
+margin_bottom = 129.0
+text = "NOSE VIEW"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -129.0
+grow_horizontal = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Altitude" type="Label" parent="Control/HBoxContainer"]
+margin_left = 283.0
+margin_top = 32.0
+margin_right = 531.0
+margin_bottom = 97.0
+text = "Alt : %d, "
+align = 1
+valign = 1
+
+[node name="Air" type="Label" parent="Control/HBoxContainer"]
+margin_left = 535.0
+margin_top = 32.0
+margin_right = 741.0
+margin_bottom = 97.0
+text = "Air : %d"
+align = 1
+valign = 1

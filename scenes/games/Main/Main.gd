@@ -9,7 +9,20 @@ var current_level_index := 0
 
 
 onready var root := $Level
+onready var countdown := $CanvasLayer/Control/Countdown
 
+
+var loading := false
+
+
+var loader : ResourceInteractiveLoader
+
+var next_level = null
+
+
+var hours := 0
+var minutes := 0
+var seconds := 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,19 +31,64 @@ func _ready():
 	load_level(current_level_index)
 	
 	LevelManager.connect("next_level_called", self, "go_to_next_level")
+	LevelManager.connect("restart_level_called", self, "restart_level")
 	
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	
+	if loader:
+		var result = loader.poll()
+		if result == ERR_FILE_EOF:
+			var next_level_resource = loader.get_resource()
+			next_level = next_level_resource.instance()
+			loader = null
+			$StartTimer.start()
+		
+	
+
+
+func _unhandled_input(event):
+	
+	if Input.is_action_just_pressed("next_level"):
+		
+		go_to_next_level()
+		
 
 
 func go_to_next_level():
+	
+	if loading:
+		return
+	
 	current_level_index = current_level_index +1
 	load_level(current_level_index)
-	pass
+	
+	$AnimationPlayer.play("fadeIn")
+	
+	# save time
+	hours = countdown.hours
+	minutes = countdown.minutes
+	seconds = countdown.seconds
+	
+
+
+func restart_level(cause):
+	
+	$AnimationPlayer.play("fadeIn")
+	
+	if cause != "":
+		$CanvasLayer/Cause.text = cause
+		$CanvasLayer/Cause.visible = true
+	
+	
+	load_level(current_level_index)
+	
+	# restore time
+	countdown.hours = hours
+	countdown.minutes = minutes
+	countdown.seconds = seconds
 
 
 func load_level(index : int):
@@ -40,13 +98,15 @@ func load_level(index : int):
 		if index < level_paths.size():
 			var level_path : String = level_paths[index]
 			
-			var next_level_resource = load("res://%s" % level_path)
-			var next_level = next_level_resource.instance()
+			loader = ResourceLoader.load_interactive("res://%s" % level_path)
 			
-			for child in root.get_children():
-				child.queue_free()
+			print("loader created", loader)
 			
-			root.add_child(next_level)
+			#var next_level_resource = load("res://%s" % level_path)
+			#next_level = next_level_resource.instance()
+			
+			
+			loading = true
 			
 		else:
 			push_error("Invalid index %d to load level" % index)
@@ -54,12 +114,25 @@ func load_level(index : int):
 	else:
 		push_error("Invalid levels config")
 	
-	
-	pass
 
 
-func reset_level():
+func start_level_loaded():
 	
-	load_level(current_level_index)
+	if next_level:
+		
+		_clean_scene()
+		
+		root.add_child(next_level)
+		next_level = null
+		
+		$AnimationPlayer.play("fadeOut")
+		$CanvasLayer/Cause.visible = false
+		
+		loading = false
+
+
+func _clean_scene():
 	
-	pass
+	for child in root.get_children():
+		child.queue_free()
+	
