@@ -80,6 +80,11 @@ next_level={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="environement"
+3d_physics/layer_2="glider"
+
 [physics]
 
 common/enable_pause_aware_picking=true

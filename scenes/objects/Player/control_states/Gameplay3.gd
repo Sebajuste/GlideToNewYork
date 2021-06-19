@@ -35,6 +35,13 @@ func exit():
 	pass
 
 
+func process(delta):
+	var cockpit = player.skin.get_node("Cockpit")
+	cockpit.altitude = player.global_transform.origin.y
+	cockpit.air_speed = player.velocity.length()
+	
+
+
 func physics_process(delta):
 	
 	process_input(delta)

@@ -1,12 +1,26 @@
 extends RigidBody
 
+signal force_updated
+
+var last_speed := 0.0
+
+
+onready var cessna := $"../Cessna"
 
 
 func _ready():
 	pass
 
-func _physics_process(delta):
-	pass
+
+func _physics_process(delta : float):
+	
+	var speed := linear_velocity.length()
+	
+	var force := abs(speed - last_speed) / delta
+	last_speed = speed
+	
+	emit_signal("force_updated", force)
+	
 
 
 func _unhandled_input(event):
@@ -17,7 +31,6 @@ func _unhandled_input(event):
 			chain.get_node("PinJoint7").queue_free()
 		
 
-var old_linear_velocity := Vector3.ZERO
 
 func _integrate_forces(state : PhysicsDirectBodyState) -> void:
 	
@@ -28,14 +41,12 @@ func _integrate_forces(state : PhysicsDirectBodyState) -> void:
 	state.angular_velocity = Vector3.ZERO
 	state.linear_velocity.z = 0
 	
-	#print("linear_velocity: ", (state.linear_velocity - old_linear_velocity).length() )
+	var height_delta : float = cessna.global_transform.origin.y - self.global_transform.origin.y
 	
-	old_linear_velocity = state.linear_velocity
+	if owner.started and height_delta > 2:
+		
+		state.apply_central_impulse(Vector3.UP * randf() * height_delta )
+		
 	
-	pass
 
 
-func _on_Cessna_first_move(v : Vector3):
-	set_linear_velocity(v)
-	pass
-	

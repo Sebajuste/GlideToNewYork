@@ -25,5 +25,5 @@ func _physics_process(delta):
 	self.global_transform.origin = lerp(self.global_transform.origin, pos, camera_speed * delta)
 	
 	
-	$WorleyCloud.cloud_density = pos.y / 30
+	#$WorleyCloud.cloud_density = pos.y / 30
 	

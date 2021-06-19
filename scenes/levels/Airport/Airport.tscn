@@ -15,7 +15,7 @@ size = Vector2( 150, 30 )
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.305882, 0.305882, 0.305882, 1 )
 
-[node name="Level" type="Spatial"]
+[node name="Aiport" type="Spatial"]
 
 [node name="Ground" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

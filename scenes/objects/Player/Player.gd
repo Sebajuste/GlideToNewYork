@@ -39,27 +39,14 @@ onready var control: StateMachine = $ControlSM
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("test ", control_mode)
 	if control_mode:
 		control.transition_to("Control/%s" % control_mode)
 	else:
 		control.transition_to("Control/None")
-	
-	pass # Replace with function body.
-
-
-func _unhandled_input(event):
-	
-	
-	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	$Skin/Cockpit.altitude = self.global_transform.origin.y
-	$Skin/Cockpit.air_speed = self.velocity.length()
-	
 	pass
 
 
@@ -70,50 +57,3 @@ func set_control_mode(value):
 		control.transition_to("Control/%s" % value)
 
 
-"""
-func _physics_process(delta):
-	
-	process_input(delta)
-	
-	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-	transform.basis = transform.basis.rotated(Vector3.UP, turn_input * turn_speed * delta)
-	
-	if grounded:
-		$Skin.rotation.z = 0
-	else:
-		$Skin.rotation.z = lerp($Skin.rotation.z, turn_input, level_speed * delta)
-	
-	forward_speed = lerp(forward_speed, target_speed, acceleration * delta)
-	velocity = -transform.basis.z * forward_speed
-	velocity = move_and_slide(velocity, Vector3.UP)
-	
-	
-	# Handle landing/taking off
-	if is_on_floor():
-		if not grounded:
-			rotation.x = 0
-		velocity.z -= 1
-		grounded = true
-	else:
-		grounded = false
-	
-	pass
-
-
-func process_input(delta):
-	# Throttle input
-	if Input.is_action_pressed("throttle_up"):
-		target_speed = min(forward_speed + throttle_delta * delta, max_flight_speed)
-	if Input.is_action_pressed("throttle_down"):
-		var limit = 0 if grounded else min_flight_speed
-		target_speed = max(forward_speed - throttle_delta * delta, limit)
-	
-	# Turn (roll/yaw) input
-	turn_input = 0
-	turn_input -= Input.get_action_strength("roll_right")
-	turn_input += Input.get_action_strength("roll_left")
-	# Pitch (climb/dive) input
-	pitch_input = 0
-	pitch_input -= Input.get_action_strength("pitch_down")
-	pitch_input += Input.get_action_strength("pitch_up")
-"""

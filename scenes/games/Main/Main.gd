@@ -9,7 +9,12 @@ var current_level_index := 0
 
 
 onready var root := $Level
+onready var countdown := $CanvasLayer/Control/Countdown
 
+
+var hours := 0
+var minutes := 0
+var seconds := 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +23,7 @@ func _ready():
 	load_level(current_level_index)
 	
 	LevelManager.connect("next_level_called", self, "go_to_next_level")
+	LevelManager.connect("restart_level_called", self, "restart_level")
 	
 	pass # Replace with function body.
 
@@ -39,7 +45,23 @@ func _unhandled_input(event):
 func go_to_next_level():
 	current_level_index = current_level_index +1
 	load_level(current_level_index)
+	
+	# save time
+	hours = countdown.hours
+	minutes = countdown.minutes
+	seconds = countdown.seconds
+	
 	pass
+
+
+func restart_level():
+	
+	load_level(current_level_index)
+	
+	# restore time
+	countdown.hours = hours
+	countdown.minutes = minutes
+	countdown.seconds = seconds
 
 
 func load_level(index : int):
@@ -63,12 +85,4 @@ func load_level(index : int):
 	else:
 		push_error("Invalid levels config")
 	
-	
-	pass
 
-
-func reset_level():
-	
-	load_level(current_level_index)
-	
-	pass
