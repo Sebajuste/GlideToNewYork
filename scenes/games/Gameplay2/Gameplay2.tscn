@@ -16,7 +16,7 @@ _data = {
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="OpenSimplexNoise" id=20]
+[sub_resource type="OpenSimplexNoise" id=3]
 octaves = 4
 
 [sub_resource type="QuadMesh" id=4]
@@ -167,10 +167,9 @@ transform = Transform( 0.99993, 0, -0.011821, 0, 1, 0, 0.011821, 0, 0.999928, -5
 rotation_mode = 1
 script = ExtResource( 5 )
 speed = 30.0
-noise = SubResource( 20 )
+noise = SubResource( 3 )
 
 [node name="Pivot" type="Spatial" parent="Path/PathFollow"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Player" parent="Path/PathFollow/Pivot" instance=ExtResource( 1 )]
 transform = Transform( 1, -3.91155e-08, -2.98023e-08, -2.23517e-08, 1, 1.30385e-08, 2.98023e-08, -1.86265e-09, 1, 0, 0, 0 )
@@ -186,6 +185,13 @@ transform = Transform( 1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, -26.03
 mesh = SubResource( 4 )
 material/0 = SubResource( 17 )
 script = ExtResource( 6 )
+
+[node name="FillLight" type="OmniLight" parent="Path/PathFollow/Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 2.98023e-08, 0, 1, 0, 15.6334, 0 )
+light_color = Color( 0.87, 0.924167, 1, 1 )
+light_energy = 2.0
+omni_range = 48.0
+omni_attenuation = 4.0
 
 [node name="PathTest" type="Path" parent="."]
 visible = false
