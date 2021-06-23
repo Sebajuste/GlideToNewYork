@@ -12,9 +12,7 @@ height = 8.01168
 
 [node name="WTC" type="Spatial"]
 
-[node name="WTCB" type="StaticBody" parent="." groups=[
-"wtc",
-]]
+[node name="WTCB" type="StaticBody" parent="."]
 collision_layer = 5
 
 [node name="CollisionShape3" type="CollisionShape" parent="WTCB"]

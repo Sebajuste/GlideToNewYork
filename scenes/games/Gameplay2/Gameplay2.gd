@@ -21,3 +21,10 @@ func _on_Area_body_entered(body):
 	LevelManager.next_level()
 	
 	pass # Replace with function body.
+
+
+func _on_Player_crashed():
+	
+	LevelManager.restart_level("Votre planeur a décroché dans les nuages")
+	
+	pass # Replace with function body.

@@ -17,7 +17,11 @@ var loading := false
 
 var loader : ResourceInteractiveLoader
 
+var level_resource
+
 var next_level = null
+
+var first_load := true
 
 
 var hours := 0
@@ -41,15 +45,23 @@ func _process(delta):
 	if loader:
 		var result = loader.poll()
 		if result == ERR_FILE_EOF:
-			var next_level_resource = loader.get_resource()
-			next_level = next_level_resource.instance()
+			level_resource = loader.get_resource()
+			next_level = level_resource.instance()
 			loader = null
-			$StartTimer.start()
-		
-	
+			
+			if first_load:
+				first_load = false
+				start_level_loaded()
+			else:
+				$StartTimer.start()
 
 
 func _unhandled_input(event):
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		
+		get_tree().quit()
+		
 	
 	if Input.is_action_just_pressed("next_level"):
 		
@@ -82,8 +94,9 @@ func restart_level(cause):
 		$CanvasLayer/Cause.text = cause
 		$CanvasLayer/Cause.visible = true
 	
+	next_level = level_resource.instance()
 	
-	load_level(current_level_index)
+	$StartTimer.start()
 	
 	# restore time
 	countdown.hours = hours
@@ -99,13 +112,6 @@ func load_level(index : int):
 			var level_path : String = level_paths[index]
 			
 			loader = ResourceLoader.load_interactive("res://%s" % level_path)
-			
-			print("loader created", loader)
-			
-			#var next_level_resource = load("res://%s" % level_path)
-			#next_level = next_level_resource.instance()
-			
-			
 			loading = true
 			
 		else:
@@ -136,3 +142,14 @@ func _clean_scene():
 	for child in root.get_children():
 		child.queue_free()
 	
+
+
+func stop_music():
+	
+	var tween = $Music/Tween
+	tween.interpolate_property($Music, "volume_db",
+		$Music.volume_db, -80, 2,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+	)
+	
+	tween.start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/objects/Player/control_states/Control.gd" type="Script" id=1]
 [ext_resource path="res://scripts/miscs/state_machine/state_machine.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sounds/glider.ogg" type="AudioStream" id=8]
 [ext_resource path="res://scenes/objects/Cockpit/Cockpit.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/objects/Player/control_states/Gameplay1.gd" type="Script" id=10]
+[ext_resource path="res://assets/sounds/crash.ogg" type="AudioStream" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.542182, 0.937697, 6.01239 )
@@ -56,6 +57,11 @@ script = ExtResource( 7 )
 [node name="Gameplay3" type="Node" parent="ControlSM/Control"]
 script = ExtResource( 5 )
 
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -3, 0 )
+collision_mask = 5
+
 [node name="WindAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 8 )
 unit_db = 40.0
@@ -64,7 +70,5 @@ autoplay = true
 max_distance = 200.0
 bus = "effects"
 
-[node name="RayCast" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, -3, 0 )
-collision_mask = 5
+[node name="CrashAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 11 )
