@@ -1,0 +1,158 @@
+[gd_resource type="VisualShader" load_steps=11 format=2]
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=1]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=2]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=3]
+uniform_name = "Diffuse"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=4]
+uniform_name = "AlphaMap"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=5]
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=6]
+uniform_name = "Metallic"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=7]
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=8]
+uniform_name = "Rougness"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=9]
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=10]
+uniform_name = "EmissionMap"
+texture_type = 1
+color_default = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode depth_draw_always, specular_schlick_ggx;
+
+uniform sampler2D Diffuse : hint_albedo;
+uniform sampler2D AlphaMap : hint_albedo;
+uniform sampler2D Metallic : hint_albedo;
+uniform sampler2D Rougness : hint_albedo;
+uniform sampler2D EmissionMap : hint_black_albedo;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// TextureUniform:2
+	vec3 n_out2p0;
+	float n_out2p1;
+	{
+		vec4 n_tex_read = texture(Diffuse, UV.xy);
+		n_out2p0 = n_tex_read.rgb;
+		n_out2p1 = n_tex_read.a;
+	}
+
+// TextureUniform:3
+	vec3 n_out3p0;
+	float n_out3p1;
+	{
+		vec4 n_tex_read = texture(AlphaMap, UV.xy);
+		n_out3p0 = n_tex_read.rgb;
+		n_out3p1 = n_tex_read.a;
+	}
+
+// VectorDecompose:4
+	float n_out4p0 = n_out3p0.x;
+	float n_out4p1 = n_out3p0.y;
+	float n_out4p2 = n_out3p0.z;
+
+// TextureUniform:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 n_tex_read = texture(Metallic, UV.xy);
+		n_out5p0 = n_tex_read.rgb;
+		n_out5p1 = n_tex_read.a;
+	}
+
+// VectorDecompose:6
+	float n_out6p0 = n_out5p0.x;
+	float n_out6p1 = n_out5p0.y;
+	float n_out6p2 = n_out5p0.z;
+
+// TextureUniform:7
+	vec3 n_out7p0;
+	float n_out7p1;
+	{
+		vec4 n_tex_read = texture(Rougness, UV.xy);
+		n_out7p0 = n_tex_read.rgb;
+		n_out7p1 = n_tex_read.a;
+	}
+
+// VectorDecompose:8
+	float n_out8p0 = n_out7p0.x;
+	float n_out8p1 = n_out7p0.y;
+	float n_out8p2 = n_out7p0.z;
+
+// TextureUniform:9
+	vec3 n_out9p0;
+	float n_out9p1;
+	{
+		vec4 n_tex_read = texture(EmissionMap, UV.xy);
+		n_out9p0 = n_tex_read.rgb;
+		n_out9p1 = n_tex_read.a;
+	}
+
+// VectorDecompose:10
+	float n_out10p0 = n_out9p0.x;
+	float n_out10p1 = n_out9p0.y;
+	float n_out10p2 = n_out9p0.z;
+
+// VectorOp:11
+	vec3 n_out11p0 = n_out2p0 * vec3(n_out10p0);
+
+// Output:0
+	ALBEDO = n_out2p0;
+	ALPHA = n_out4p0;
+	METALLIC = n_out6p0;
+	ROUGHNESS = n_out8p0;
+	EMISSION = n_out11p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -261, 107.25 )
+modes/depth_draw = 1
+nodes/fragment/0/position = Vector2( 560, 180 )
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( -240, 40 )
+nodes/fragment/3/node = SubResource( 4 )
+nodes/fragment/3/position = Vector2( -240, 220 )
+nodes/fragment/4/node = SubResource( 5 )
+nodes/fragment/4/position = Vector2( 0, 260 )
+nodes/fragment/5/node = SubResource( 6 )
+nodes/fragment/5/position = Vector2( -240, 400 )
+nodes/fragment/6/node = SubResource( 7 )
+nodes/fragment/6/position = Vector2( 0, 440 )
+nodes/fragment/7/node = SubResource( 8 )
+nodes/fragment/7/position = Vector2( -240, 580 )
+nodes/fragment/8/node = SubResource( 9 )
+nodes/fragment/8/position = Vector2( 0, 620 )
+nodes/fragment/9/node = SubResource( 10 )
+nodes/fragment/9/position = Vector2( -240, 760 )
+nodes/fragment/10/node = SubResource( 1 )
+nodes/fragment/10/position = Vector2( 0, 800 )
+nodes/fragment/11/node = SubResource( 2 )
+nodes/fragment/11/position = Vector2( 226, 744 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0, 3, 0, 4, 0, 4, 0, 0, 1, 5, 0, 6, 0, 6, 0, 0, 2, 7, 0, 8, 0, 8, 0, 0, 3, 9, 0, 10, 0, 10, 0, 11, 1, 2, 0, 11, 0, 11, 0, 0, 5 )

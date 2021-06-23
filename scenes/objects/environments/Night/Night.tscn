@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.00784314, 0.0627451, 0.0980392, 1 )
+sky_horizon_color = Color( 0.00784314, 0.12549, 0.294118, 1 )
+ground_bottom_color = Color( 0, 0, 0, 1 )
+ground_horizon_color = Color( 0.14902, 0.117647, 0.0901961, 1 )
+sun_latitude = 11.0
+sun_longitude = 28.0
+sun_angle_min = 3.0
+sun_angle_max = 32.0
+sun_curve = 0.00473661
+sun_energy = 50.0
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+fog_enabled = true
+fog_color = Color( 0.027451, 0.0313726, 0.0352941, 1 )
+fog_sun_color = Color( 0.701961, 0.768627, 1, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 4000.0
+fog_depth_curve = 6.06287
+
+[node name="NightWorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 2 )
