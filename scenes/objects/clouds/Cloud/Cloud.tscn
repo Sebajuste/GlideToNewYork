@@ -159,7 +159,9 @@ shader_param/wind_speed = 0.05
 [sub_resource type="SphereShape" id=18]
 radius = 8.0
 
-[node name="Cloud" type="StaticBody"]
+[node name="Cloud" type="StaticBody" groups=[
+"obstacle",
+]]
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
