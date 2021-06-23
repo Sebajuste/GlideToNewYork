@@ -52,6 +52,10 @@ config/icon="res://icon.png"
 
 LevelManager="*res://scripts/singletons/LevelManager.gd"
 
+[display]
+
+window/size/fullscreen=true
+
 [input]
 
 pitch_up={
