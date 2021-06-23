@@ -10,6 +10,7 @@ onready var player := $Player
 
 var height_limited := true
 
+var ending := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,8 +32,8 @@ func _physics_process(delta):
 			LevelManager.next_level()
 			
 	
-	if player.global_transform.origin.y > 200 and height_limited:
-		
+	if not ending and player.global_transform.origin.y > 200 and height_limited:
+		ending = true
 		LevelManager.restart_level("Votre planneur a été repéré")
 		
 	

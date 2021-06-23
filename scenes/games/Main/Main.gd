@@ -17,6 +17,8 @@ var loading := false
 
 var loader : ResourceInteractiveLoader
 
+var level_resource
+
 var next_level = null
 
 
@@ -41,8 +43,8 @@ func _process(delta):
 	if loader:
 		var result = loader.poll()
 		if result == ERR_FILE_EOF:
-			var next_level_resource = loader.get_resource()
-			next_level = next_level_resource.instance()
+			level_resource = loader.get_resource()
+			next_level = level_resource.instance()
 			loader = null
 			$StartTimer.start()
 		
@@ -82,8 +84,10 @@ func restart_level(cause):
 		$CanvasLayer/Cause.text = cause
 		$CanvasLayer/Cause.visible = true
 	
+	next_level = level_resource.instance()
+	#load_level(current_level_index)
 	
-	load_level(current_level_index)
+	$StartTimer.start()
 	
 	# restore time
 	countdown.hours = hours
