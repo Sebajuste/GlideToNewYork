@@ -2,6 +2,9 @@ class_name Player
 extends KinematicBody
 
 
+signal crashed
+
+
 const GRAVITY := 9.81
 
 
@@ -21,6 +24,8 @@ export var throttle_delta = 30
 export var acceleration = 6.0
 export var deceleration = 0.5
 
+export(String, "None", "Gameplay1", "Gameplay2", "Gameplay3") var control_mode = "None" setget set_control_mode
+
 # Current speed
 var forward_speed = 0
 # Throttle input speed
@@ -32,7 +37,7 @@ var velocity = Vector3.ZERO
 var turn_input = 0
 var pitch_input = 0
 
-export(String, "None", "Gameplay1", "Gameplay2", "Gameplay3") var control_mode = "None" setget set_control_mode
+var alive := true
 
 onready var skin := $Skin
 onready var control: StateMachine = $ControlSM
@@ -49,6 +54,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func crash():
+	if alive:
+		alive = false
+		emit_signal("crashed")
+		$CrashAudio.play()
 
 
 func set_control_mode(value):

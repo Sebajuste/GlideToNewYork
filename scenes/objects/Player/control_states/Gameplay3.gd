@@ -56,13 +56,26 @@ func physics_process(delta):
 		player.skin.rotation.z = lerp(player.skin.rotation.z, player.turn_input, player.level_speed * delta)
 	
 	if player.raycast_down.is_colliding():
-		
 		player.forward_speed = lerp(player.forward_speed, 0.0, player.deceleration * delta)
 	else:
 		player.forward_speed = lerp(player.forward_speed, player.target_speed, player.acceleration * delta)
 	
 	player.velocity = -player.transform.basis.z * player.forward_speed
-	player.velocity = player.move_and_slide(player.velocity, Vector3.UP)
+	
+	#player.velocity = player.move_and_slide(player.velocity, Vector3.UP)
+	
+	var collision = player.move_and_collide(player.velocity * delta)
+	if collision:
+		player.velocity = player.velocity.slide(collision.normal)
+		
+		if collision.collider.is_in_group("landing_zone"):
+			
+			player.transform.basis = Basis(Vector3.UP, player.transform.basis.get_euler().y )
+			
+		else:
+			
+			player.crash()
+			
 	
 	
 	# Handle landing/taking off
