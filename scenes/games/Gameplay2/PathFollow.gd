@@ -22,6 +22,7 @@ var cloud_popped := false
 func _ready():
 	pass # Replace with function body.
 
+
 func _process(delta):
 	var offset = speed * delta
 	self.offset += offset
@@ -37,6 +38,7 @@ func _process(delta):
 			space_between_row = min_space_between_row
 		pass
 	pass
+
 
 func _generate_clouds():
 	var hole : float = rand_range(-100.0, 100.0)
