@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/3d/vehicules/cessna/Cessna.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/3d/vehicules/Cessna/Cessna.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/3d/Materials/planes.material" type="Material" id=2]
 
 [node name="Cessna" type="MeshInstance"]
