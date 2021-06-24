@@ -16,7 +16,7 @@ func _ready():
 	
 	var tween = $Music/Tween
 	tween.interpolate_property($Music, "volume_db",
-		-80, 0, 3,
+		-80, 0, 2,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	
