@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/cinematics/LandingWTC/LandingWTC.gd" type="Script" id=5]
 [ext_resource path="res://assets/musics/credits.ogg" type="AudioStream" id=6]
 
-[sub_resource type="ProceduralSky" id=2]
+[sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.00784314, 0.0627451, 0.0980392, 1 )
 sky_horizon_color = Color( 0.00392157, 0.0313726, 0.0705882, 1 )
 ground_bottom_color = Color( 0, 0, 0, 1 )
@@ -19,9 +19,9 @@ sun_angle_max = 32.0
 sun_curve = 0.00473661
 sun_energy = 50.0
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=2]
 background_mode = 2
-background_sky = SubResource( 2 )
+background_sky = SubResource( 1 )
 fog_enabled = true
 fog_color = Color( 0.027451, 0.0313726, 0.0352941, 1 )
 fog_sun_color = Color( 0.701961, 0.768627, 1, 1 )
@@ -29,8 +29,7 @@ fog_depth_begin = 0.0
 fog_depth_end = 4000.0
 fog_depth_curve = 6.06287
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="Animation" id=3]
 length = 10.0
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Glider")
@@ -97,7 +96,7 @@ script = ExtResource( 5 )
 transform = Transform( -0.975696, -0.0038092, 0.219097, -0.00390406, 0.999992, 1.16415e-09, -0.219096, -0.000855368, -0.975703, -1301.79, 535.434, 342.931 )
 
 [node name="Camera1" type="Camera" parent="."]
-transform = Transform( 0.536263, 0.0788556, -0.84036, 0, 0.995626, 0.0934251, 0.844051, -0.0501004, 0.533917, -1321.37, 537.611, 355.371 )
+transform = Transform( 0.536263, 0.0788643, -0.840359, 0, 0.995625, 0.0934355, 0.844051, -0.0501059, 0.533917, -1321.37, 537.611, 355.371 )
 current = true
 far = 5000.0
 script = ExtResource( 4 )
@@ -114,7 +113,7 @@ light_energy = 0.74
 light_indirect_energy = 1.59
 
 [node name="NightWorldEnvironment" parent="." instance=ExtResource( 2 )]
-environment = SubResource( 3 )
+environment = SubResource( 2 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
@@ -204,4 +203,4 @@ valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/default = SubResource( 1 )
+anims/default = SubResource( 3 )
