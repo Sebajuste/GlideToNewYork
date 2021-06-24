@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://assets/3d/Materials/BuildingMat.tres" type="Material" id=1]
-[ext_resource path="res://assets/3d/buildings/SceneryBuildings/Building05.mesh" type="ArrayMesh" id=2]
-
-[node name="Building05" type="MeshInstance"]
-mesh = ExtResource( 2 )
-skeleton = NodePath("")
-material/0 = ExtResource( 1 )
